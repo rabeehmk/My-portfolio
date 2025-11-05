@@ -408,7 +408,7 @@ const About = () => {
             </a>
           </ClickSpark>
           <ClickSpark sparkColor="#3b82f6" intensity="medium" size="small">
-            <a href="mailto:your.email@example.com" className="social-link">
+            <a href="mailto:rabeehmk485@gmail.com" className="social-link">
               <FaEnvelope />
             </a>
           </ClickSpark>
