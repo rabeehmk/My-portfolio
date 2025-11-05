@@ -26,7 +26,7 @@ const adjust = (value, fromMin, fromMax, toMin, toMax) =>
 const easeInOutCubic = x => (x < 0.5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2);
 
 const ProfileCardComponent = ({
-  avatarUrl = '/image/image.JPG',
+  avatarUrl = `${process.env.PUBLIC_URL}/image/image.JPG`,
   iconUrl = '<Placeholder for icon URL>',
   grainUrl = '<Placeholder for grain URL>',
   behindGradient,
@@ -400,7 +400,7 @@ const About = () => {
 
           <div className="about-image">
             <ProfileCard
-              avatarUrl="/image/image.JPG"
+              avatarUrl={`${process.env.PUBLIC_URL}/image/image.JPG`}
               name="Rabeeh Muhammad Sali"
               title="Software Engineer"
               handle="rabeehmk485"

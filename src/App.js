@@ -12,7 +12,7 @@ import './App.css';
 
 function App() {
   return (
-    <Router>
+    <Router basename="/My-portfolio">
       <div className="App">
         <Navigation />
         <main className="main-content">

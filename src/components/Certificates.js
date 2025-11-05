@@ -12,8 +12,8 @@ const Certificates = () => {
       title: 'Python - Django',
       issuer: 'Django Software Foundation',
       year: '2024',
-      image: '/assets/@icons8-python-48.png',
-      images: ['/assets/@icons8-python-48.png'],
+      image: `${process.env.PUBLIC_URL}/assets/@icons8-python-48.png`,
+      images: [`${process.env.PUBLIC_URL}/assets/@icons8-python-48.png`],
       description: 'Completed comprehensive training in Python programming and Django web framework, covering full-stack web development, REST APIs, database management, and deployment.',
       skills: ['Python Programming', 'Django Framework', 'REST APIs', 'Database Management', 'Web Development'],
       icon: FaPython,
@@ -24,8 +24,8 @@ const Certificates = () => {
       title: 'Artificial Intelligence',
       issuer: 'UL Research & OSPF',
       year: '2025',
-      image: '/assets/AI.jpg',
-      images: ['/assets/AI.jpg'],
+      image: `${process.env.PUBLIC_URL}/assets/AI.jpg`,
+      images: [`${process.env.PUBLIC_URL}/assets/AI.jpg`],
       description: 'Completed a certified training in AI fundamentals, machine learning concepts, and practical applications.',
       skills: ['Machine Learning', 'AI Fundamentals', 'Data Analysis', 'Neural Networks', 'Python'],
       icon: FaBrain,
@@ -95,7 +95,7 @@ const Certificates = () => {
               onClick={() => openCertificateModal('ccsa')}
             >
               <div className="certificate-image">
-                <img src="/assets/@icons8-python-48.png" alt="Python - Django" />
+                <img src={`${process.env.PUBLIC_URL}/assets/@icons8-python-48.png`} alt="Python - Django" />
                 <div className="certificate-overlay"></div>
                 <div className="certificate-icon skill-hexagon skill-hex-primary">
                   <FaPython />
@@ -126,7 +126,7 @@ const Certificates = () => {
               onClick={() => openCertificateModal('ai')}
             >
               <div className="certificate-image">
-                <img src="/assets/AI.jpg" alt="Artificial Intelligence" />
+                <img src={`${process.env.PUBLIC_URL}/assets/AI.jpg`} alt="Artificial Intelligence" />
                 <div className="certificate-overlay"></div>
                 <div className="certificate-icon skill-hexagon skill-hex-secondary">
                   <FaBrain />
