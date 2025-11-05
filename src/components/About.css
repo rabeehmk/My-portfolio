@@ -478,7 +478,8 @@
 }
 
 .pc-avatar-content {
-  mix-blend-mode: screen;
+  /* Ensure avatar renders with natural colors */
+  mix-blend-mode: normal;
   overflow: hidden;
 }
 
@@ -598,7 +599,8 @@
     0.1px
   ) !important;
   z-index: 5;
-  mix-blend-mode: luminosity;
+  /* Prevent grayscale/luminosity blending on text/content over the image */
+  mix-blend-mode: normal;
 }
 
 .pc-details {

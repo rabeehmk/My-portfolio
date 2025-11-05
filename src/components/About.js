@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useCallback, useMemo } from 'react';
+import React, { useEffect, useRef, useCallback, useMemo, useState } from 'react';
 import { FaGithub, FaLinkedin, FaTwitter, FaEnvelope } from 'react-icons/fa';
 import ClickSpark from './ClickSpark';
 import './About.css';
@@ -316,6 +316,35 @@ const ProfileCardComponent = ({
 const ProfileCard = React.memo(ProfileCardComponent);
 
 const About = () => {
+  const [isMailModalOpen, setIsMailModalOpen] = useState(false);
+  const emailAddress = 'rabeehmk485@gmail.com';
+  const [emailCopied, setEmailCopied] = useState(false);
+
+  const openMailModal = useCallback((e) => {
+    e?.preventDefault?.();
+    setIsMailModalOpen(true);
+  }, []);
+
+  const closeMailModal = useCallback(() => setIsMailModalOpen(false), []);
+
+  const copyEmailToClipboard = useCallback(async () => {
+    try {
+      await navigator.clipboard.writeText(emailAddress);
+      setEmailCopied(true);
+      setTimeout(() => setEmailCopied(false), 1500);
+    } catch (_) {
+      const textarea = document.createElement('textarea');
+      textarea.value = emailAddress;
+      textarea.setAttribute('readonly', '');
+      textarea.style.position = 'absolute';
+      textarea.style.left = '-9999px';
+      document.body.appendChild(textarea);
+      textarea.select();
+      try { document.execCommand('copy'); setEmailCopied(true); setTimeout(() => setEmailCopied(false), 1500); } catch (_) {}
+      document.body.removeChild(textarea);
+    }
+  }, []);
+
   return (
     <div className="about">
       <div className="about-container">
@@ -408,11 +437,51 @@ const About = () => {
             </a>
           </ClickSpark>
           <ClickSpark sparkColor="#3b82f6" intensity="medium" size="small">
-            <a href="mailto:rabeehmk485@gmail.com" className="social-link">
+              <a href={`mailto:${emailAddress}`} className="social-link" onClick={openMailModal}>
               <FaEnvelope />
             </a>
           </ClickSpark>
         </div>
+          {isMailModalOpen && (
+            <div className="modal-overlay" onClick={closeMailModal}>
+              <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+                <div className="modal-header">
+                  <h2 className="modal-title">Contact via Email</h2>
+                  <button className="modal-close" onClick={closeMailModal} aria-label="Close">
+                    ×
+                  </button>
+                </div>
+                <div className="modal-body" style={{ display: 'grid', gridTemplateColumns: '1fr', gap: '16px' }}>
+                  <div>
+                    <div style={{ fontSize: '0.9rem', color: '#4a5568', marginBottom: '6px' }}>Email address</div>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                      <span style={{ fontFamily: 'monospace', fontSize: '1rem', color: '#2d3748' }}>{emailAddress}</span>
+                      <button
+                        type="button"
+                        onClick={copyEmailToClipboard}
+                        style={{
+                          fontSize: '0.75rem',
+                          padding: '4px 8px',
+                          borderRadius: '6px',
+                          border: '1px solid #e2e8f0',
+                          background: '#ffffff',
+                          cursor: 'pointer',
+                          color: emailCopied ? '#16a34a' : '#4a5568'
+                        }}
+                        aria-label={emailCopied ? 'Copied' : 'Copy email'}
+                        title={emailCopied ? 'Copied' : 'Copy'}
+                      >
+                        {emailCopied ? 'Copied' : 'Copy'}
+                      </button>
+                    </div>
+                  </div>
+                  <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap' }}>
+                    <a href={`mailto:${emailAddress}`} className="modal-btn modal-btn-primary">Open Mail App</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
       </div>
     </div>
   );
