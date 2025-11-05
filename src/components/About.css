@@ -189,6 +189,13 @@
     grid-template-columns: 1fr;
     gap: 2rem;
     text-align: center;
+    /* Show image above text on mobile */
+    display: flex;
+    flex-direction: column;
+  }
+
+  .about-image {
+    order: -1;
   }
   
   .about-title {
