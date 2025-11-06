@@ -23,4 +23,9 @@ Thumbs.db
 .vscode/
 .idea/
 
+# Firebase
+.firebase/
+firebase-debug.log
+firebase-debug.*.log
+
 

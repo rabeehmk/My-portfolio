@@ -93,10 +93,19 @@ const LightRays = ({
 
       if (!containerRef.current) return;
 
-      const renderer = new Renderer({
-        dpr: Math.min(window.devicePixelRatio, 2),
-        alpha: true
-      });
+      let renderer;
+      try {
+        renderer = new Renderer({
+          dpr: Math.min(window.devicePixelRatio, 2),
+          alpha: true
+        });
+      } catch (err) {
+        console.warn('WebGL not supported or failed to initialize. Skipping LightRays.', err);
+        rendererRef.current = null;
+        uniformsRef.current = null;
+        meshRef.current = null;
+        return; // fail-safe in production to avoid crashing the app
+      }
       rendererRef.current = renderer;
 
       const gl = renderer.gl;
