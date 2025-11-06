@@ -244,18 +244,6 @@ const Skills = () => {
         <div className="skill-card-body">
           <p className="skill-description">{skill.description}</p>
           
-          <div className="skill-progress-container">
-            <div className="skill-progress-bar">
-              <div 
-                className="skill-progress-fill"
-                style={{ 
-                  width: animatedSkills[skill.id] ? `${skill.level}%` : '0%',
-                  background: skill.gradient
-                }}
-              />
-            </div>
-          </div>
-
           <div className="skill-details">
             {isSoftSkill ? (
               <>
