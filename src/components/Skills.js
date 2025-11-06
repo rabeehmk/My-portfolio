@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { 
-  FaReact, FaJs, FaPython, FaGitAlt, FaCode, FaLanguage, FaTools, FaUsers, 
-  FaBrain, FaClock, FaComments, FaJava, FaDatabase, FaServer, FaMobile, 
-  FaCloud, FaShieldAlt, FaRocket, FaLightbulb, FaHandshake, FaChartLine,
-  FaCogs, FaPalette, FaTerminal, FaGlobe, FaLaptopCode, FaProjectDiagram
+  FaReact, FaJs, FaPython, FaGitAlt, FaCode, FaTools, 
+  FaDatabase, FaServer, FaCloud, FaPalette, FaEye, FaTimes
 } from 'react-icons/fa';
 import { 
   SiDjango, SiBootstrap, SiHtml5, SiCss3, SiTailwindcss, SiGithub, 
@@ -13,10 +11,11 @@ import {
 } from 'react-icons/si';
 import ClickSpark from './ClickSpark';
 import './Skills.css';
+import './Certificates.css';
 
 const Skills = () => {
   const [activeCategory, setActiveCategory] = useState('all');
-  const [animatedSkills, setAnimatedSkills] = useState({});
+  const [selectedSkill, setSelectedSkill] = useState(null);
 
   // Enhanced Technical Skills Data
   const technicalSkillsData = [
@@ -93,6 +92,18 @@ const Skills = () => {
       experience: '1 years'
     },
     {
+      id: 'vscode',
+      name: 'Visual Studio Code',
+      icon: SiVisualstudiocode,
+      description: 'Primary editor with extensions and productive workflows',
+      category: 'Tools',
+      level: 92,
+      color: '#007ACC',
+      gradient: 'linear-gradient(135deg, #007ACC 0%, #00C8FF 100%)',
+      projects: ['Debugging', 'Git Integration', 'Remote Development'],
+      experience: '1 years'
+    },
+    {
       id: 'database',
       name: 'Database Design',
       icon: FaDatabase,
@@ -107,95 +118,14 @@ const Skills = () => {
 
   ];
 
-  // Enhanced Soft Skills Data
-  const softSkillsData = [
-    {
-      id: 'teamwork',
-      name: 'Teamwork',
-      icon: FaHandshake,
-      description: 'Collaborative problem solving and project management',
-      category: 'Collaboration',
-      level: 92,
-      color: '#10b981',
-      gradient: 'linear-gradient(135deg, #10b981 0%, #059669 100%)',
-      examples: ['Agile Development', 'Cross-functional Teams', 'Mentoring'],
-      strength: 'Strong'
-    },
-    {
-      id: 'critical-thinking',
-      name: 'Critical Thinking',
-      icon: FaBrain,
-      description: 'Analytical problem solving and decision making',
-      category: 'Analysis',
-      level: 88,
-      color: '#8b5cf6',
-      gradient: 'linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%)',
-      examples: ['Code Reviews', 'Architecture Decisions', 'Debugging'],
-      strength: 'Strong'
-    },
-    {
-      id: 'time-management',
-      name: 'Time Management',
-      icon: FaClock,
-      description: 'Efficient project delivery and deadline management',
-      category: 'Productivity',
-      level: 90,
-      color: '#f59e0b',
-      gradient: 'linear-gradient(135deg, #f59e0b 0%, #d97706 100%)',
-      examples: ['Sprint Planning', 'Task Prioritization', 'Milestone Tracking'],
-      strength: 'Strong'
-    },
-    {
-      id: 'communication',
-      name: 'Communication',
-      icon: FaComments,
-      description: 'Clear technical communication and documentation',
-      category: 'Soft Skills',
-      level: 85,
-      color: '#ef4444',
-      gradient: 'linear-gradient(135deg, #ef4444 0%, #dc2626 100%)',
-      examples: ['Technical Writing', 'Client Presentations', 'Team Meetings'],
-      strength: 'Good'
-    },
-    {
-      id: 'leadership',
-      name: 'Leadership',
-      icon: FaRocket,
-      description: 'Leading projects and mentoring team members',
-      category: 'Leadership',
-      level: 82,
-      color: '#06b6d4',
-      gradient: 'linear-gradient(135deg, #06b6d4 0%, #0891b2 100%)',
-      examples: ['Project Leadership', 'Team Mentoring', 'Strategic Planning'],
-      strength: 'Good'
-    },
-    {
-      id: 'adaptability',
-      name: 'Adaptability',
-      icon: FaCogs,
-      description: 'Quick learning and adapting to new technologies',
-      category: 'Learning',
-      level: 88,
-      color: '#84cc16',
-      gradient: 'linear-gradient(135deg, #84cc16 0%, #65a30d 100%)',
-      examples: ['New Frameworks', 'Technology Shifts', 'Problem Solving'],
-      strength: 'Strong'
-    }
-  ];
+  // Soft skills removed per request
 
-  // Skill categories for filtering
+  // Skill categories for filtering (trimmed)
   const skillCategories = [
     { id: 'all', name: 'All Skills', icon: FaCode },
     { id: 'Frontend', name: 'Frontend', icon: FaPalette },
     { id: 'Backend', name: 'Backend', icon: FaServer },
-    { id: 'Tools', name: 'Tools', icon: FaTools },
-    { id: 'DevOps', name: 'DevOps', icon: FaCloud },
-    { id: 'Collaboration', name: 'Collaboration', icon: FaUsers },
-    { id: 'Analysis', name: 'Analysis', icon: FaChartLine },
-    { id: 'Productivity', name: 'Productivity', icon: FaClock },
-    { id: 'Soft Skills', name: 'Soft Skills', icon: FaComments },
-    { id: 'Leadership', name: 'Leadership', icon: FaRocket },
-    { id: 'Learning', name: 'Learning', icon: FaLightbulb }
+    { id: 'Tools', name: 'Tools', icon: FaTools }
   ];
 
   // Filter skills based on active category
@@ -203,82 +133,79 @@ const Skills = () => {
     ? technicalSkillsData 
     : technicalSkillsData.filter(skill => skill.category === activeCategory);
 
-  const filteredSoftSkills = activeCategory === 'all' 
-    ? softSkillsData 
-    : softSkillsData.filter(skill => skill.category === activeCategory);
+  // Soft skills removed
 
-  // Animation trigger for skill bars
+  // Modal handlers for skill details
+  const openSkillModal = (skillId) => {
+    setSelectedSkill(skillId);
+  };
+
+  const closeSkillModal = () => {
+    setSelectedSkill(null);
+  };
+
+  // Close modal when clicking outside
   useEffect(() => {
-    const timer = setTimeout(() => {
-      const skills = [...filteredTechnicalSkills, ...filteredSoftSkills];
-      skills.forEach(skill => {
-        setAnimatedSkills(prev => ({
-          ...prev,
-          [skill.id]: true
-        }));
-      });
-    }, 500);
+    const handleClickOutside = (e) => {
+      if (selectedSkill && e.target.classList.contains('certificate-modal-overlay')) {
+        closeSkillModal();
+      }
+    };
 
-    return () => clearTimeout(timer);
-  }, [activeCategory]);
+    if (selectedSkill) {
+      document.addEventListener('click', handleClickOutside);
+      document.body.style.overflow = 'hidden';
+    }
 
-  const SkillCard = ({ skill, isSoftSkill = false }) => {
+    return () => {
+      document.removeEventListener('click', handleClickOutside);
+      document.body.style.overflow = 'unset';
+    };
+  }, [selectedSkill]);
+
+  // Close modal with Escape key
+  useEffect(() => {
+    const handleEscape = (e) => {
+      if (e.key === 'Escape' && selectedSkill) {
+        closeSkillModal();
+      }
+    };
+
+    document.addEventListener('keydown', handleEscape);
+    return () => document.removeEventListener('keydown', handleEscape);
+  }, [selectedSkill]);
+
+  const SkillCard = ({ skill }) => {
     const IconComponent = skill.icon;
-    
     return (
-      <ClickSpark sparkColor="#3b82f6" intensity="low" size="small">
-        <div className={`skill-card ${isSoftSkill ? 'soft-skill' : 'technical-skill'}`}>
-          <div className="skill-card-header">
-          <div className="skill-icon-wrapper" style={{ background: skill.gradient }}>
-            <IconComponent className="skill-icon" />
+      <ClickSpark sparkColor="#3b82f6" intensity="low" size="medium">
+        <div 
+          className="certificate-card skill-card-pro"
+          onClick={() => openSkillModal(skill.id)}
+        >
+          <div className="certificate-image" style={{ background: 'transparent' }}>
+            <div style={{ 
+              width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center',
+              background: skill.gradient
+            }}>
+              <div className="certificate-icon" style={{ transform: 'none' }}>
+                <IconComponent style={{ color: '#fff', fontSize: '2rem' }} />
+              </div>
+            </div>
+            <div className="certificate-overlay"></div>
           </div>
-          <div className="skill-info">
-            <h3 className="skill-name">{skill.name}</h3>
-            <span className="skill-category">{skill.category}</span>
-          </div>
-          <div className="skill-level">
-            <span className="level-percentage">{skill.level}%</span>
-          </div>
-        </div>
-        
-        <div className="skill-card-body">
-          <p className="skill-description">{skill.description}</p>
-          
-          <div className="skill-details">
-            {isSoftSkill ? (
-              <>
-                <div className="skill-detail">
-                  <span className="detail-label">Strength:</span>
-                  <span className="detail-value">{skill.strength}</span>
-                </div>
-                <div className="skill-examples">
-                  <span className="examples-label">Examples:</span>
-                  <div className="examples-tags">
-                    {skill.examples.map((example, index) => (
-                      <span key={index} className="example-tag">{example}</span>
-                    ))}
-                  </div>
-                </div>
-              </>
-            ) : (
-              <>
-                <div className="skill-detail">
-                  <span className="detail-label">Experience:</span>
-                  <span className="detail-value">{skill.experience}</span>
-                </div>
-                <div className="skill-projects">
-                  <span className="projects-label">Projects:</span>
-                  <div className="projects-tags">
-                    {skill.projects.map((project, index) => (
-                      <span key={index} className="project-tag">{project}</span>
-                    ))}
-                  </div>
-                </div>
-              </>
-            )}
+          <div className="certificate-content">
+            <h3 className="certificate-title">{skill.name}</h3>
+            <p className="certificate-issuer" style={{ color: '#334155' }}>{skill.category}</p>
+            <p className="certificate-desc">{skill.description}</p>
+            <button 
+              className="btn btn-outline btn-sm btn-full"
+              onClick={(e) => { e.stopPropagation(); openSkillModal(skill.id); }}
+            >
+              <FaEye /> View Details
+            </button>
           </div>
         </div>
-      </div>
       </ClickSpark>
     );
   };
@@ -313,58 +240,81 @@ const Skills = () => {
           </div>
         </div>
 
-        {/* Skills Content */}
-        <div className="skills-content">
-          {/* Technical Skills Section */}
-          {filteredTechnicalSkills.length > 0 && (
-            <div className="skills-section technical-skills-section">
-              <div className="section-header">
-                <h2 className="section-title">
-                  <FaCode className="section-icon" />
-                  Technical Skills
-                </h2>
-                <p className="section-description">
-                  Programming languages, frameworks, and development tools
-                </p>
-              </div>
-              <div className="skills-grid">
-                {filteredTechnicalSkills.map(skill => (
-                  <SkillCard key={skill.id} skill={skill} isSoftSkill={false} />
-                ))}
-              </div>
-            </div>
-          )}
-
-          {/* Soft Skills Section */}
-          {filteredSoftSkills.length > 0 && (
-            <div className="skills-section soft-skills-section">
-              <div className="section-header">
-                <h2 className="section-title">
-                  <FaUsers className="section-icon" />
-                  Soft Skills
-                </h2>
-                <p className="section-description">
-                  Professional competencies and interpersonal abilities
-                </p>
-              </div>
-              <div className="skills-grid">
-                {filteredSoftSkills.map(skill => (
-                  <SkillCard key={skill.id} skill={skill} isSoftSkill={true} />
-                ))}
-              </div>
-          </div>
-          )}
-
-          {/* No Skills Found */}
-          {filteredTechnicalSkills.length === 0 && filteredSoftSkills.length === 0 && (
-            <div className="no-skills-found">
-              <FaCode className="no-skills-icon" />
-              <h3>No skills found</h3>
-              <p>Try selecting a different category to view skills.</p>
-          </div>
-          )}
+        {/* Skills Content - like Certificates */}
+        <div className="certificates-grid">
+          {filteredTechnicalSkills.map(skill => (
+            <SkillCard key={skill.id} skill={skill} />
+          ))}
         </div>
       </div>
+      {selectedSkill && (
+        <div 
+          className="certificate-modal-overlay"
+          onClick={closeSkillModal}
+        >
+          <div 
+            className="certificate-modal-content"
+            onClick={(e) => e.stopPropagation()}
+          >
+            {(() => {
+              const skill = technicalSkillsData.find(s => s.id === selectedSkill);
+              if (!skill) return null;
+              const IconComponent = skill.icon;
+              return (
+                <>
+                  <div className="certificate-modal-header">
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+                      <IconComponent style={{ fontSize: '1.5rem' }} />
+                      <h2 style={{ fontSize: '1.5rem', fontWeight: 700, margin: 0 }}>
+                        {skill.name}
+                      </h2>
+                    </div>
+                    <button className="certificate-modal-close" onClick={closeSkillModal}>
+                      <FaTimes />
+                    </button>
+                  </div>
+                  <div className="certificate-modal-body">
+                    <div style={{ marginBottom: '1.5rem' }}>
+                      <div style={{ 
+                        position: 'relative', height: '200px', overflow: 'hidden', borderRadius: '0.75rem', marginBottom: '1.5rem'
+                      }}>
+                        <div style={{ width: '100%', height: '100%', background: skill.gradient }}></div>
+                        <div style={{ 
+                          position: 'absolute', top: '1rem', right: '1rem', width: '72px', height: '72px',
+                          borderRadius: '16px', display: 'flex', alignItems: 'center', justifyContent: 'center',
+                          background: 'rgba(0,0,0,0.25)'
+                        }}>
+                          <IconComponent style={{ color: '#fff', fontSize: '1.5rem' }} />
+                        </div>
+                      </div>
+                      <div style={{ marginBottom: '1rem' }}>
+                        <h4 style={{ fontSize: '1.1rem', fontWeight: 700, color: '#3b82f6', marginBottom: '0.5rem' }}>
+                          {skill.category}
+                        </h4>
+                        <p style={{ color: '#718096', lineHeight: 1.6 }}>{skill.description}</p>
+                      </div>
+                      <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap', marginBottom: '1rem' }}>
+                        <span className="badge badge-outline">Level: {skill.level}%</span>
+                        <span className="badge badge-outline">Experience: {skill.experience}</span>
+                      </div>
+                      <div>
+                        <h5 style={{ fontWeight: 500, color: '#718096', textTransform: 'uppercase', letterSpacing: '0.05em', fontSize: '0.75rem', marginBottom: '0.75rem' }}>
+                          Projects & Areas
+                        </h5>
+                        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem' }}>
+                          {skill.projects.map((p, idx) => (
+                            <span key={idx} className="badge badge-outline" style={{ fontSize: '0.75rem' }}>{p}</span>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </>
+              );
+            })()}
+          </div>
+        </div>
+      )}
     </div>
   );
 };
