@@ -37,20 +37,7 @@ const Home = () => {
                 and delivering exceptional user experiences.
               </p>
               
-              <div className="hero-stats">
-                <div className="stat-item">
-                  <span className="stat-number">50+</span>
-                  <span className="stat-label">Projects</span>
-                </div>
-                <div className="stat-item">
-                  <span className="stat-number">3+</span>
-                  <span className="stat-label">Years</span>
-                </div>
-                <div className="stat-item">
-                  <span className="stat-number">20+</span>
-                  <span className="stat-label">Clients</span>
-                </div>
-              </div>
+             
               
               <div className="hero-actions">
                 <ClickSpark sparkColor="#3b82f6" intensity="high" size="large">

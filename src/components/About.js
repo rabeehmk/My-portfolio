@@ -369,21 +369,7 @@ const About = () => {
               </p>
             </div>
 
-            <div className="about-highlights">
-              <div className="highlight-item">
-                <span className="highlight-number">50+</span>
-                <span className="highlight-text">Projects Completed</span>
-              </div>
-              <div className="highlight-item">
-                <span className="highlight-number">3+</span>
-                <span className="highlight-text">Years Experience</span>
-              </div>
-              <div className="highlight-item">
-                <span className="highlight-number">20+</span>
-                <span className="highlight-text">Happy Clients</span>
-              </div>
-            </div>
-
+           
             <div className="about-actions">
               <ClickSpark sparkColor="#3b82f6" intensity="high" size="large">
                 <a href="/contact" className="btn btn-primary">
