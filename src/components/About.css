@@ -21,9 +21,15 @@
   margin-bottom: 3rem;
 }
 
-/* Desktop: Grid naturally places about-text (left) and about-image (right) */
 .about-text {
   animation: fadeInLeft 1s ease-out;
+  /* Ensure text appears in first column on desktop */
+  grid-column: 1;
+}
+
+.about-image {
+  /* Ensure image appears in second column (right side) on desktop */
+  grid-column: 2;
 }
 
 .about-title {
@@ -195,12 +201,16 @@
     flex-direction: column;
   }
 
-  .about-image {
-    order: -1;
+  .about-text {
+    /* Reset grid-column for mobile */
+    grid-column: auto;
+    order: 2;
   }
 
-  .about-text {
-    order: 2;
+  .about-image {
+    /* Reset grid-column and use flex order for mobile */
+    grid-column: auto;
+    order: -1;
   }
   
   .about-title {
