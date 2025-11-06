@@ -21,6 +21,7 @@
   margin-bottom: 3rem;
 }
 
+/* Desktop: Grid naturally places about-text (left) and about-image (right) */
 .about-text {
   animation: fadeInLeft 1s ease-out;
 }
@@ -196,6 +197,10 @@
 
   .about-image {
     order: -1;
+  }
+
+  .about-text {
+    order: 2;
   }
   
   .about-title {
