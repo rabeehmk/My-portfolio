@@ -357,8 +357,8 @@ const About = () => {
             
             <div className="about-description">
               <p>
-                I'm a passionate developer with over 5 years of experience creating 
-                digital solutions that make a difference. I specialize in React, Node.js, 
+                I'm a passionate developer with over 1 years of experience creating 
+                digital solutions that make a difference. I specialize in  python , django ,React, Node.js, 
                 and modern web technologies, with a keen eye for design and user experience.
               </p>
               <p>
