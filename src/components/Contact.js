@@ -77,10 +77,10 @@ const Contact = () => {
   };
 
   const socialLinks = [
-    { icon: FaLinkedin, url: 'https://linkedin.com', label: 'LinkedIn' },
+    { icon: FaLinkedin, url: 'https://www.linkedin.com/in/rabeeh-muhammed-sali-8319602b9', label: 'LinkedIn' },
     { icon: FaGithub, url: 'https://github.com/', label: 'GitHub' },
     { icon: FaTwitter, url: 'https://twitter.com', label: 'Twitter' },
-    { icon: FaInstagram, url: 'https://instagram.com', label: 'Instagram' }
+    { icon: FaInstagram, url: 'https://www.instagram.com/_rabeeh_mk?igsh=Mm5tbTczM3Rka3Uz', label: 'Instagram' }
   ];
 
   return (

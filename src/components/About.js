@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useCallback, useMemo, useState } from 'react';
-import { FaGithub, FaLinkedin, FaTwitter, FaEnvelope } from 'react-icons/fa';
+import { FaGithub, FaLinkedin, FaTwitter, FaEnvelope, FaInstagram } from 'react-icons/fa';
 import ClickSpark from './ClickSpark';
 import './About.css';
 
@@ -413,13 +413,19 @@ const About = () => {
             </a>
           </ClickSpark>
           <ClickSpark sparkColor="#3b82f6" intensity="medium" size="small">
-            <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="social-link">
+            <a href="https://www.linkedin.com/in/rabeeh-muhammed-sali-8319602b9" target="_blank" rel="noopener noreferrer" className="social-link">
+            
               <FaLinkedin />
             </a>
           </ClickSpark>
           <ClickSpark sparkColor="#3b82f6" intensity="medium" size="small">
             <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="social-link">
               <FaTwitter />
+            </a>
+          </ClickSpark>
+          <ClickSpark sparkColor="#3b82f6" intensity="medium" size="small">
+            <a href="https://www.instagram.com/_rabeeh_mk?igsh=Mm5tbTczM3Rka3Uz" target="_blank" rel="noopener noreferrer" className="social-link">
+              <FaInstagram />
             </a>
           </ClickSpark>
           <ClickSpark sparkColor="#3b82f6" intensity="medium" size="small">
